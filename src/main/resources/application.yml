@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
+generator:
+  target-schema: public
+  java-package: com.example.model
+  data-class-type: plain
+  build-path: generated-data-classes
+postgresql:
+  data-types:
+    character-varying: java.lang.String
+    character: java.lang.String
+    text: java.lang.String
+    smallint: short
+    integer: int
+    bigint: long
+    real: float
+    double-precision: double
+    numeric: java.math.BigDecimal
+    boolean: boolean
+    bytea: byte[]
+    date: java.sql.Date
+    timestamp-without-time-zone: java.sql.Timestamp
+
