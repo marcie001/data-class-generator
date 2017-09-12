@@ -31,5 +31,5 @@ public class Column {
 	/**
 	 * 長さ.
 	 */
-	private final Integer maxLength;
+	private final Long maxLength;
 }

@@ -1,7 +1,6 @@
 package com.example.dataclassgenerator.generator;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,15 +16,18 @@ public class CommandMain implements CommandLineRunner {
 
 	private final SchemaService schemaService;
 
+	private final DataTypeConverter dataTypeConverter;
+
 	private final Converter converter;
 
 	private final ClassWriter classWriter;
 
 	@Autowired
-	public CommandMain(GeneratorSetting generatorSetting, SchemaService schemaService, Converter converter,
-			ClassWriter classWriter) {
+	public CommandMain(GeneratorSetting generatorSetting, SchemaService schemaService,
+			DataTypeConverter dataTypeConverter, Converter converter, ClassWriter classWriter) {
 		this.generatorSetting = generatorSetting;
 		this.schemaService = schemaService;
+		this.dataTypeConverter = dataTypeConverter;
 		this.converter = converter;
 		this.classWriter = classWriter;
 	}
@@ -33,9 +35,8 @@ public class CommandMain implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		List<Table> tables = schemaService.findAll(generatorSetting.getTargetSchema());
-		Map<String, String> dataTypes = schemaService.dataTypes();
 
-		List<JavaClass> javaClasses = converter.convert(tables, dataTypes, generatorSetting.getJavaPackage());
+		List<JavaClass> javaClasses = converter.convert(tables, dataTypeConverter, generatorSetting.getJavaPackage());
 
 		logger.info(javaClasses.toString());
 

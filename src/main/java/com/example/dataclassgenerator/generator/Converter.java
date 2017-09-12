@@ -2,13 +2,12 @@ package com.example.dataclassgenerator.generator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.base.CaseFormat;
 
 public abstract class Converter {
 
-	public List<JavaClass> convert(List<Table> tables, Map<String, String> dataTypeConversionMap, String javaPackage) {
+	public List<JavaClass> convert(List<Table> tables, DataTypeConverter datatypeConverter, String javaPackage) {
 		List<JavaClass> list = new ArrayList<>();
 		for (Table t : tables) {
 			JavaClass jc = JavaClass.builder()
@@ -19,7 +18,7 @@ public abstract class Converter {
 			for (Column c : t.getColumns()) {
 				jc.addToFields(JavaField.builder()
 						.name(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, c.getName().toLowerCase()))
-						.type(dataTypeConversionMap.get(c.getDataType())).build());
+						.type(datatypeConverter.convert(c.getDataType())).build());
 			}
 
 			configureClassAnnotations(jc);

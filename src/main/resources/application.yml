@@ -9,18 +9,38 @@ generator:
   data-class-type: plain
   build-path: generated-data-classes
 postgresql:
-  data-types:
-    character-varying: java.lang.String
+  conversion-map:
+    character varying: java.lang.String
     character: java.lang.String
     text: java.lang.String
     smallint: short
     integer: int
     bigint: long
     real: float
-    double-precision: double
+    double precision: double
     numeric: java.math.BigDecimal
     boolean: boolean
     bytea: byte[]
     date: java.sql.Date
-    timestamp-without-time-zone: java.sql.Timestamp
-
+    timestamp without time zone: java.sql.Timestamp
+mysql:
+  conversion-map:
+    varchar: java.lang.String
+    char: java.lang.String
+    tinytext: java.lang.String
+    text: java.lang.String
+    mediumtext: java.lang.String
+    longtext: java.lang.String
+    tinyblob: byte[]
+    blob: byte[]
+    mediumblob: byte[]
+    longblob: byte[]
+    smallint: short
+    int: int
+    bigint: long
+    double: double
+    decimal: java.math.BigDecimal
+    date: java.sql.Date
+    datetime: java.sql.Timestamp
+    timestamp: java.sql.Timestamp
+    time: java.sql.Time

@@ -1,4 +1,4 @@
-package com.example.dataclassgenerator.postgresql;
+package com.example.dataclassgenerator.mysql;
 
 import java.util.Map;
 
@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Data;
 
-@ConfigurationProperties("postgresql")
+@ConfigurationProperties("mysql")
 @Data
-public class PostgresqlSetting {
+public class MysqlSetting {
 
 	private Map<String, String> conversionMap;
 
