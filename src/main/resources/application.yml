@@ -1,14 +1,21 @@
 spring:
+  profiles:
+    active: postgresql
+generator:
+  target-schema: public
+  java-package: com.example.model
+# plain or lombok
+  data-class-type: plain
+  build-path: generated-data-classes
+---
+spring:
+  profiles: postgresql
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: password
 generator:
   target-schema: public
-  java-package: com.example.model
-  data-class-type: plain
-  build-path: generated-data-classes
-postgresql:
   conversion-map:
     character varying: java.lang.String
     character: java.lang.String
@@ -23,7 +30,15 @@ postgresql:
     bytea: byte[]
     date: java.sql.Date
     timestamp without time zone: java.sql.Timestamp
-mysql:
+---
+spring:
+  profiles: mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/sample?autoReconnect=true&useSSL=false
+    username: root
+    password: password
+generator:
+  target-schema: sample
   conversion-map:
     varchar: java.lang.String
     char: java.lang.String

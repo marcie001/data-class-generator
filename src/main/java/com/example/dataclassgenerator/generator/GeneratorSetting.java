@@ -1,5 +1,8 @@
 package com.example.dataclassgenerator.generator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,6 +27,8 @@ public class GeneratorSetting {
 
 	@NotEmpty
 	private String buildPath;
+
+	private Map<String, String> conversionMap = new HashMap<>();
 
 	public String getTemplateFileName() {
 		return dataClassType + ".ftlh";
