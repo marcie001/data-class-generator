@@ -5,7 +5,7 @@ import ${imp};
 </#list>
 
 /**
- * class for the ${classNameAsSnakeCase} database table.
+ * ${classJavaDoc}
  *
  */
 <#list classAnnotations as annotation>

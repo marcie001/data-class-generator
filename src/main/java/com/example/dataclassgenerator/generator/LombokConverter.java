@@ -1,7 +1,10 @@
 package com.example.dataclassgenerator.generator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+
+import com.example.dataclassgenerator.singularizer.Singularizer;
 
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +12,11 @@ import lombok.Data;
 @Component
 @ConditionalOnProperty(name = "generator.data-class-type", havingValue = "lombok")
 public class LombokConverter extends Converter {
+
+	@Autowired
+	public LombokConverter(Singularizer singularizer) {
+		super(singularizer);
+	}
 
 	@Override
 	protected void configureClassAnnotations(JavaClass jc) {

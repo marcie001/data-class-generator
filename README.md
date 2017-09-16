@@ -24,7 +24,7 @@ $ ./mvnw clean spring-boot:run -Dgenerator.data-class-type=lombok -Dgenerator.ta
 
 It will generate java files as follows.
 
-`generated-data-classes/com/example/foo/model/Products.java`
+`generated-data-classes/com/example/foo/model/Product.java`
 
 
 ```java
@@ -41,7 +41,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class Products implements Serializable {
+public class Product implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
@@ -60,7 +60,7 @@ public class Products implements Serializable {
 }
 ```
 
-`generated-data-classes/com/example/foo/model/Orders.java`
+`generated-data-classes/com/example/foo/model/Order.java`
 
 
 ```java
@@ -77,7 +77,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class Orders implements Serializable {
+public class Order implements Serializable {
 
         private static final long serialVersionUID = 1L;
 
@@ -90,7 +90,7 @@ public class Orders implements Serializable {
 }
 ```
 
-`generated-data-classes/com/example/foo/model/OrderDetails.java`
+`generated-data-classes/com/example/foo/model/OrderDetail.java`
 
 ```java
 package com.example.foo.model;
@@ -105,7 +105,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class OrderDetails implements Serializable {
+public class OrderDetail implements Serializable {
 
         private static final long serialVersionUID = 1L;
 

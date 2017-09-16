@@ -2,6 +2,8 @@ package com.example.dataclassgenerator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,12 @@ import org.springframework.util.ResourceUtils;
 import com.example.dataclassgenerator.generator.DataTypeConverter;
 import com.example.dataclassgenerator.generator.GeneratorSetting;
 import com.example.dataclassgenerator.generator.MapDataTypeConverter;
+import com.example.dataclassgenerator.singularizer.EndsWithEsRule;
+import com.example.dataclassgenerator.singularizer.EndsWithIesRule;
+import com.example.dataclassgenerator.singularizer.EndsWithIiRule;
+import com.example.dataclassgenerator.singularizer.EndsWithSRule;
+import com.example.dataclassgenerator.singularizer.IrregularRule;
+import com.example.dataclassgenerator.singularizer.Rule;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
@@ -41,6 +49,12 @@ public class DataClassGeneratorApplication {
 	@Bean
 	DataTypeConverter postgresqlMapDataTypeConverter(GeneratorSetting setting) {
 		return new MapDataTypeConverter(setting.getConversionMap());
+	}
+
+	@Bean
+	List<Rule> rules() {
+		return Arrays.asList(new IrregularRule(), new EndsWithIiRule(), new EndsWithIesRule(), new EndsWithEsRule(),
+				new EndsWithSRule());
 	}
 
 }

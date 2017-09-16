@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.util.StringUtils;
 
-import com.google.common.base.CaseFormat;
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -30,6 +28,8 @@ public class JavaClass {
 	private final String packageName;
 
 	private final Set<String> imports = new TreeSet<>();
+
+	private final String classJavaDoc;
 
 	private final List<JavaAnnotation> classAnnotations = new ArrayList<>();
 
@@ -59,10 +59,6 @@ public class JavaClass {
 	public void addToClassAnnotations(JavaAnnotation annotation) {
 		classAnnotations.add(annotation);
 		addToImports(annotation.getName());
-	}
-
-	public String getClassNameAsSnakeCase() {
-		return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, className);
 	}
 
 	public void addToInterfaces(String interfaceName) {
