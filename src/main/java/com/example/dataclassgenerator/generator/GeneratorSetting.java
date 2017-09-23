@@ -31,6 +31,6 @@ public class GeneratorSetting {
 	private Map<String, String> conversionMap = new HashMap<>();
 
 	public String getTemplateFileName() {
-		return dataClassType + ".ftlh";
+		return dataClassType + ".ftlp";
 	}
 }

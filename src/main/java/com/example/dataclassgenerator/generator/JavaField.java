@@ -77,4 +77,13 @@ public class JavaField {
 		return sb.toString();
 	}
 
+	/**
+	 * Return true, if this field is an instance field. Return false, if not.
+	 * 
+	 * @return Return true, if this field is an instance field. Return false, if
+	 *         not.
+	 */
+	public boolean isInstanceField() {
+		return !isStaticField();
+	}
 }

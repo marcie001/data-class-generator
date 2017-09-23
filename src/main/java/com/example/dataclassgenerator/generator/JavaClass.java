@@ -51,9 +51,19 @@ public class JavaClass {
 				.collect(Collectors.joining(", "));
 	}
 
-	public String getAllFieldNames() {
+	public String getAllInitializableFieldNames() {
 		return fields.stream().filter(JavaField::isInitializable).map(JavaField::getName)
 				.collect(Collectors.joining(", "));
+	}
+
+	public String getAllInstanceFieldNames() {
+		return fields.stream().filter(JavaField::isInstanceField).map(JavaField::getName)
+				.collect(Collectors.joining(", "));
+	}
+
+	public String getToStringCode() {
+		return fields.stream().filter(JavaField::isInstanceField).map(e -> String.format("%1$s=\" + %1$s", e.getName()))
+				.collect(Collectors.joining(" + \", ", "\"" + getClassName() + "(", " + \")\""));
 	}
 
 	public void addToImports(String className) {

@@ -45,6 +45,10 @@ public class ${className}${implementsLiteral} {
 
 	</#if>
 </#list>
+	@Override
+	public String toString() {
+		return ${toStringCode};
+	}
 
 	/**
 	 * Builder of ${className} class.
@@ -60,7 +64,7 @@ public class ${className}${implementsLiteral} {
 		private ${className}Builder() {}
 
 		public ${className} build() {
-			return new ${className}(${allFieldNames});
+			return new ${className}(${allInitializableFieldNames});
 		}
 
 <#list fields as field>
