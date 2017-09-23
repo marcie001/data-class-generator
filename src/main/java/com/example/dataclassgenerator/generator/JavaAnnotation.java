@@ -38,6 +38,15 @@ public class JavaAnnotation {
 				.collect(Collectors.joining(", ", "(", ")"))).toString();
 	}
 
+	public JavaAnnotation addToElements(String name, String value) {
+		return addToElements(name, new String[] { value });
+	}
+
+	public JavaAnnotation addToElements(String name, String[] values) {
+		elements.put(name, values);
+		return this;
+	}
+
 	private String toValueLiteral(String[] values) {
 		if (values.length == 1) {
 			return values[0];

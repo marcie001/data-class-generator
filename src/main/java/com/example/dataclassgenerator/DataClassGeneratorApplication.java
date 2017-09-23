@@ -2,6 +2,9 @@ package com.example.dataclassgenerator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Clock;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,6 +58,21 @@ public class DataClassGeneratorApplication {
 	List<Rule> rules() {
 		return Arrays.asList(new IrregularRule(), new EndsWithIiRule(), new EndsWithIesRule(), new EndsWithEsRule(),
 				new EndsWithSRule());
+	}
+
+	@Bean
+	Clock clock() {
+		return Clock.systemDefaultZone();
+	}
+
+	@Bean
+	OffsetDateTime generatedDate(Clock clock) {
+		return OffsetDateTime.ofInstant(clock.instant(), clock.getZone());
+	}
+
+	@Bean
+	String generatedDateLiteral(OffsetDateTime generatedDate) {
+		return "\"" + generatedDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME) + "\"";
 	}
 
 }

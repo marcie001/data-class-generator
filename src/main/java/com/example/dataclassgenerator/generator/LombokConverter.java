@@ -14,12 +14,13 @@ import lombok.Data;
 public class LombokConverter extends Converter {
 
 	@Autowired
-	public LombokConverter(Singularizer singularizer) {
-		super(singularizer);
+	public LombokConverter(Singularizer singularizer, String generatedDateLiteral) {
+		super(singularizer, generatedDateLiteral);
 	}
 
 	@Override
 	protected void configureClassAnnotations(JavaClass jc) {
+		super.configureClassAnnotations(jc);
 		jc.addToClassAnnotations(JavaAnnotation.builder().name(Data.class.getName()).build());
 		jc.addToClassAnnotations(JavaAnnotation.builder().name(Builder.class.getName()).build());
 	}

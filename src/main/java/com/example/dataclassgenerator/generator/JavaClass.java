@@ -66,6 +66,17 @@ public class JavaClass {
 				.collect(Collectors.joining(" + \", ", "\"" + getClassName() + "(", " + \")\""));
 	}
 
+	public String getHashCodeCode() {
+		return fields.stream().filter(JavaField::isInstanceField).map(e -> {
+			if (e.isPremitiveArray()) {
+				return "java.util.Arrays.hashCode(" + e.getName() + ")";
+			} else if (e.isArray()) {
+				return "java.util.Arrays.deepHashCode(" + e.getName() + ")";
+			}
+			return e.getName();
+		}).collect(Collectors.joining(", ", "java.util.Objects.hash(", ")"));
+	}
+
 	public void addToImports(String className) {
 		if (!className.contains(".")) {
 			return;

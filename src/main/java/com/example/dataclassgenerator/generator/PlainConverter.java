@@ -17,13 +17,8 @@ import com.example.dataclassgenerator.singularizer.Singularizer;
 public class PlainConverter extends Converter {
 
 	@Autowired
-	public PlainConverter(Singularizer singularizer) {
-		super(singularizer);
-	}
-
-	@Override
-	protected void configureClassAnnotations(JavaClass jc) {
-		// do nothing.
+	public PlainConverter(Singularizer singularizer, String generatedDateLiteral) {
+		super(singularizer, generatedDateLiteral);
 	}
 
 }

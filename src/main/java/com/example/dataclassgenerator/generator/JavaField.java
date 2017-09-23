@@ -2,6 +2,7 @@ package com.example.dataclassgenerator.generator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.util.StringUtils;
 
@@ -17,6 +18,10 @@ import lombok.Data;
 @Data
 @Builder
 public class JavaField {
+
+	private static final String PREMITIVE_ARRAY_PATTERN = "^(byte|short|int|long|float|double|boolean|char)\\[\\]$";
+
+	private static final String ARRAY_PATTERN = "[]";
 
 	private final List<JavaAnnotation> fieldAnnotations = new ArrayList<>();
 
@@ -52,6 +57,14 @@ public class JavaField {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean isPremitiveArray() {
+		return Pattern.matches(PREMITIVE_ARRAY_PATTERN, type);
+	}
+
+	public boolean isArray() {
+		return type.endsWith(ARRAY_PATTERN);
 	}
 
 	public String getShortType() {

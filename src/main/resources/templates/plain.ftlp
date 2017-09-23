@@ -8,6 +8,9 @@ import ${imp};
  * ${classJavaDoc}
  *
  */
+<#list classAnnotations as annotation>
+${annotation.javaLiteral}
+</#list>
 public class ${className}${implementsLiteral} {
 
 <#list fields as field>
@@ -48,6 +51,73 @@ public class ${className}${implementsLiteral} {
 	@Override
 	public String toString() {
 		return ${toStringCode};
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof ${className})) {
+			return false;
+		}
+
+		${className} other = (${className})o;
+<#list fields as field>
+	<#if field.instanceField>
+		<#if field.type == 'byte' >
+		if (Byte.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'short' >
+		if (Short.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'int' >
+		if (Integer.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'long' >
+		if (Long.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'float' >
+		if (Float.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'double' >
+		if (Double.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'boolean' >
+		if (Boolean.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.type == 'char' >
+		if (Character.compare(this.${field.name}, other.${field.name}) != 0) {
+			return false;
+		}
+		<#elseif field.premitiveArray >
+		if (!java.util.Arrays.equals(this.${field.name}, other.${field.name})) {
+			return false;
+		}
+		<#elseif field.array >
+		if (!java.util.Arrays.deepEquals(this.${field.name}, other.${field.name})) {
+			return false;
+		}
+		<#else>
+		if (!java.util.Objects.equals(this.${field.name}, other.${field.name})) {
+			return false;
+		}
+		</#if>
+	</#if>
+</#list>
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return ${hashCodeCode};
 	}
 
 	/**
