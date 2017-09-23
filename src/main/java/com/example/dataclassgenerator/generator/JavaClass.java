@@ -46,6 +46,16 @@ public class JavaClass {
 		return interfaces.stream().map(StringUtils::unqualify).collect(Collectors.joining(", ", " implements ", ""));
 	}
 
+	public String getAllArguments() {
+		return fields.stream().filter(JavaField::isInitializable).map(e -> e.getShortType() + " " + e.getName())
+				.collect(Collectors.joining(", "));
+	}
+
+	public String getAllFieldNames() {
+		return fields.stream().filter(JavaField::isInitializable).map(JavaField::getName)
+				.collect(Collectors.joining(", "));
+	}
+
 	public void addToImports(String className) {
 		if (!className.contains(".")) {
 			return;

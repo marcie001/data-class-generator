@@ -17,6 +17,20 @@ public class ${className}${implementsLiteral} {
 	${field.definitionLiteral};
 
 </#list>
+	public ${className}() {}
+
+	private ${className}(${allArguments}) {
+<#list fields as field>
+	<#if field.initializable>
+		this.${field.name} = ${field.name};
+	</#if>
+</#list>
+	}
+
+	public static ${className}Builder builder() {
+		return new ${className}Builder();
+	}
+
 <#list fields as field>
 	<#if !field.staticField>
 	public ${field.shortType} get${field.capitalizedName}() {
@@ -31,4 +45,33 @@ public class ${className}${implementsLiteral} {
 
 	</#if>
 </#list>
+
+	/**
+	 * Builder of ${className} class.
+	 *
+	 */
+	public static class ${className}Builder {
+<#list fields as field>
+	<#if field.initializable>
+		${field.definitionLiteral};
+	</#if>
+
+</#list>
+		private ${className}Builder() {}
+
+		public ${className} build() {
+			return new ${className}(${allFieldNames});
+		}
+
+<#list fields as field>
+	<#if field.initializable>
+		public ${className}Builder ${field.name}(${field.shortType} ${field.name}) {
+			this.${field.name} = ${field.name};
+			return this;
+		}
+
+	</#if>
+</#list>
+	}
+
 }

@@ -31,10 +31,27 @@ public class JavaField {
 	private final String initialValue;
 
 	public String getInitialValueWithEqual() {
-		if (StringUtils.isEmpty(initialValue)) {
+		if (StringUtils.isEmpty(getInitialValue())) {
 			return "";
 		}
-		return " = " + initialValue;
+		return " = " + getInitialValue();
+	}
+
+	/**
+	 * Return true, if this field can be initialized in constructor. Return
+	 * false, if not.
+	 * 
+	 * @return Return true, if this field can be initialized in constructor.
+	 *         Return false, if not.
+	 */
+	public boolean isInitializable() {
+		if (isStaticField()) {
+			return false;
+		}
+		if (isFinalField() && StringUtils.isEmpty(getInitialValue())) {
+			return false;
+		}
+		return true;
 	}
 
 	public String getShortType() {
@@ -59,4 +76,5 @@ public class JavaField {
 		}
 		return sb.toString();
 	}
+
 }
