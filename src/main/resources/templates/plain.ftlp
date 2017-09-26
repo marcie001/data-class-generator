@@ -133,6 +133,11 @@ public class ${className}${implementsLiteral} {
 </#list>
 		private ${className}Builder() {}
 
+		/**
+		 * Build ${className} object.
+		 *
+		 * return Object
+		 */
 		public ${className} build() {
 			return new ${className}(${allInitializableFieldNames});
 		}
