@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.regex.Matcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,9 +42,10 @@ public class ClassWriter {
 
 	public void write(List<JavaClass> javaClasses) throws TemplateNotFoundException, TemplateException,
 			MalformedTemplateNameException, ParseException, IOException {
+		String fileSeparator = Matcher.quoteReplacement(File.separator);
 		for (JavaClass jc : javaClasses) {
 			Template t = freeMarkerConfiguration.getTemplate(setting.getTemplateFileName());
-			Path dir = Paths.get(setting.getBuildPath(), jc.getPackageName().replaceAll("\\.", File.separator));
+			Path dir = Paths.get(setting.getBuildPath(), jc.getPackageName().replaceAll("\\.", fileSeparator));
 			dir = Files.createDirectories(dir);
 			BufferedWriter w = Files.newBufferedWriter(dir.resolve(jc.getClassName() + ".java"), StandardCharsets.UTF_8,
 					StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
